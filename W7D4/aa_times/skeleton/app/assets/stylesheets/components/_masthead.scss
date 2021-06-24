@@ -16,6 +16,10 @@
 	border-top-left-radius: 3px;
 	border-top-right-radius: 3px;
 
+	.first {
+		font-weight: bold;
+	}
+
 	a {
 		margin: 0 5px;
 		text-transform: uppercase;
@@ -70,5 +74,9 @@
 
 	strong {
 		color: green;
+	}
+
+	.last {
+		border: none;
 	}
 }
