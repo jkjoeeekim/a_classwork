@@ -6,6 +6,11 @@ section, img, div, h2, p, form,
 fieldset, label, input, textarea,
 span, article, footer, time, small {
   box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font: inherit;
 }
 
 ul {

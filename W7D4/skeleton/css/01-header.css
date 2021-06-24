@@ -1,2 +1,64 @@
 /* PHASE 1: Header */
+body {
+  font-weight: 100;
+  font-family: 'Big Shoulders Stencil Display', cursive;
+  font-size: small;
+}
 
+.header {
+  display: block;
+  background-color: red;
+}
+
+a {
+  color: white;
+  font-size: 18px;
+  text-decoration: none;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+}
+
+.header-nav {
+  position: static;
+  width: 1000px;
+  padding: 0px;
+  margin: 0 auto;
+}
+
+.header-logo {
+  float: left;
+  position: relative;
+  top: 0px;
+  left: 100px;
+  border-left: 1px solid white;
+  border-right: 1px solid white;
+  height: 100%;
+  padding: 10px 30px;
+}
+
+.header-list {
+  justify-content: space-between;
+  float: right;
+  height: 100%;
+}
+
+.header-list li {
+  float: left;
+  position: relative;
+  border-left: 1px solid white;
+  border-right: 1px solid white;
+  display: block;
+  height: 100%;
+  right: 150px;
+  padding: 10px 30px;
+}
+
+.group:after {
+  display: block;
+  content: '';
+  clear: both;
+}
+
+li:hover, .header-logo:hover {
+  background-color: black;
+}
