@@ -11,7 +11,25 @@
 
   <body>
     <header>
+      <% if flash[:errors] %>
+        <% flash[:errors].each do |error| %>
+          <li><%= error %></li>
+        <% end %>
+      <% end %>
       <h1>MUSIC APP</h1>
+      <% if logged_in? %>
+        <a href="<%= new_band_url %>">Register Band</a>
+        <a href="<%= bands_url %>">View All Bands</a>
+        <form action="<%= session_url %>" method="post">
+          <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+          <input type="hidden" name="_method" value="delete">
+          <input type="submit" value="Log Out">
+        </form>
+      <% else %>
+        <a href="<%= new_user_url %>">Create Account</a>
+        <a href="<%= new_session_url %>">Log In</a>
+      <% end %>
+
     </header>
     <%= yield %>
   </body>
