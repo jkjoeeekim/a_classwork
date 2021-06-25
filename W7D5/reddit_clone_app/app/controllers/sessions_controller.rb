@@ -1,4 +1,7 @@
 class SessionsController < ApplicationController
+  before_action :require_logged_in, only: [:destroy]
+  before_action :require_logged_out, only: [:new]
+  
   def new
     render :new
   end
@@ -15,6 +18,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    logout
+    logout_user
+    redirect_to new_session_url
   end
 end

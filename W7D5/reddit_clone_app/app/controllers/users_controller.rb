@@ -35,7 +35,9 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    if @user.update(user_params)
+    @user.update(username: params[:user][:username], password: params[:user][:password])
+
+    if @user.save
       redirect_to user_url(@user)
     else
       flash.now[:errors] = @user.errors.full_messages
