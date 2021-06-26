@@ -1,0 +1,12 @@
+<h1>All Sub-Forums</h1>
+
+<a href="<%= new_user_sub_url(current_user.id) %>">Create a subforum</a>
+
+<% @subs.each do |sub| %>
+  <ul>
+    <li>Moderator: <%= User.find_by(id: sub.moderator_id).username %></li>
+    <li>Title: <%= sub.title %></li>
+    <li>Description: <%= sub.description %></li>
+    <li><a href="<%= sub_url(sub) %>">View subforum</a></li>
+  </ul>
+<% end %>

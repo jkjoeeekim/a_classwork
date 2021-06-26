@@ -17,8 +17,11 @@
         <% end %>
       </ul>
     <% end %>
+    <a href="<%= users_url %>">All Users Page</a>
+    <a href="<%= subs_url %>">All Subforums Page</a>
     <% if logged_in? %>
       <form action="<%= session_url %>" method="POST">
+        <p>Logged in as: <%= current_user.username %></p>
         <input type="hidden" name="_method" value="DELETE">
         <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
         <input type="submit" value="Log Out">

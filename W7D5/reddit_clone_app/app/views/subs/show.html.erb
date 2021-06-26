@@ -1,0 +1,24 @@
+<h1>View Sub-Forum</h1>
+
+<a href="<%= subs_url %>">View all subforums</a>
+
+<h4>Subforum details</h4>
+<ul>
+  <li>Moderator: <%= User.find_by(id: @sub.moderator_id).username %></li>
+  <li>Title: <%= @sub.title %></li>
+  <li>Description: <%= @sub.description %></li>
+  <% if is_moderator? %>
+    <li><a href="<%= edit_sub_url(@sub) %>">Edit subforum</a></li>
+  <% end %>
+  <li><a href="<%= new_sub_post_url(@sub) %>">Create a Post</a></li>
+</ul>
+
+<h4>All subforum posts</h4>
+<ul>
+  <% if @posts %>
+    <% @posts.each do |post| %>
+      <li><%= post.title %></li>
+      <a href="<%= post_url(post) %>">View Post</a>
+    <% end %>
+  <% end %>
+</ul>
