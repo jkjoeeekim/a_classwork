@@ -1,12 +1,16 @@
 require 'rack'
-require 'byebug'
+require_relative '../lib/controller_base'
+
+class MyController < ControllerBase
+  def go
+    render :show
+  end
+end
 
 app = Proc.new do |env|
-  # debugger
   req = Rack::Request.new(env)
   res = Rack::Response.new
-  res['Content-Type'] = 'text/html'
-  res.write(req.path)
+  MyController.new(req, res).go
   res.finish
 end
 
