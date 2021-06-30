@@ -10,7 +10,7 @@ if (typeof window === 'undefined') {
  */
 function _makeGrid() {
   const grid = [];
-  for (let i = 0; i < 8; i ++) {
+  for (let i = 0; i < 8; i++) {
     grid.push(new Array(8));
   };
 
@@ -41,8 +41,8 @@ Board.DIRS = [
 Board.prototype.isValidPos = function (pos) {
   debugger;
   let temp = true;
-  pos.forEach(function(idx) { 
-    if(idx < 0 || idx > 7) {
+  pos.forEach(function (idx) {
+    if (idx < 0 || idx > 7) {
       temp = false;
     }
   });
@@ -54,7 +54,7 @@ Board.prototype.isValidPos = function (pos) {
  * throwing an Error if the position is invalid.
  */
 Board.prototype.getPiece = function (pos) {
-  if(this.isValidPos(pos)) {
+  if (this.isValidPos(pos)) {
     return this.grid[pos[0]][pos[1]];
   } else {
     throw new Error("Not valid pos!");
@@ -66,9 +66,9 @@ Board.prototype.getPiece = function (pos) {
  * matches a given color.
  */
 Board.prototype.isMine = function (pos, color) {
-  if(this.isValidPos(pos)) {
+  if (this.isValidPos(pos)) {
     let piece = this.getPiece(pos);
-    if(piece) {
+    if (piece) {
       return piece.color === color;
     } else {
       return false;
@@ -82,6 +82,8 @@ Board.prototype.isMine = function (pos, color) {
  * Checks if a given position has a piece on it.
  */
 Board.prototype.isOccupied = function (pos) {
+  let piece = this.getPiece(pos);
+  return piece instanceof Piece;
 };
 
 /**
@@ -98,6 +100,24 @@ Board.prototype.isOccupied = function (pos) {
  * Returns empty array if no pieces of the opposite color are found.
  */
 Board.prototype._positionsToFlip = function (pos, color, dir, piecesToFlip) {
+  // if (Board.DIRS.includes(dir)) {
+  //   throw new Error('Invalid direction')
+  // };
+
+  if (!this.isValidPos(pos)) {
+    return [];
+  };
+  let newPos = [];
+  let flipPieces = [];
+
+  newPos.push(pos[0] + dir[0]);
+  newPos.push(pos[1] + dir[1]);
+
+  if (!this.isMine(newPos, color)) {
+    flipPieces.push(this.getPiece(newPos))
+  };
+
+  return flipPieces.concat(this._positionsToFlip(newPos, color, dir, flipPieces))
 };
 
 /**

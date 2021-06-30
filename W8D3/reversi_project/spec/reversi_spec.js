@@ -120,21 +120,21 @@ describe("Board", function () {
 
   describe("#isOccupied", function () {
     it('should return true if there is a piece on a position', function () {
-      expect(testBoard.isOccupied([3, 3])).toEqual(true)
-      expect(testBoard.isOccupied([3, 4])).toEqual(true)
-    })
+      expect(testBoard.isOccupied([3, 3])).toEqual(true);
+      expect(testBoard.isOccupied([3, 4])).toEqual(true);
+    });
 
     it("should return false if there isn't a piece on a position", function () {
-      expect(testBoard.isOccupied([3, 5])).toEqual(false)
-      expect(testBoard.isOccupied([4, 5])).toEqual(false)
-    })
-  })
+      expect(testBoard.isOccupied([3, 5])).toEqual(false);
+      expect(testBoard.isOccupied([4, 5])).toEqual(false);
+    });
+  });
 
   describe("#_positionsToFlip", function () {
     it('returns empty array when pos is not on the board', function () {
       expect(testBoard._positionsToFlip([-1, -1], "white", [1, 0]).length).toEqual(0);
       expect(testBoard._positionsToFlip([9, 9], "white", [1, 0]).length).toEqual(0);
-    })
+    });
 
     it("returns empty array when there is a blank space one position away from the current position", function () {
       expect(testBoard._positionsToFlip([4, 6], "white", [0, 1]).length).toEqual(0);
@@ -145,7 +145,7 @@ describe("Board", function () {
       expect(testBoard._positionsToFlip([4, 6], "white", [1, 0]).length).toEqual(0);
       expect(testBoard._positionsToFlip([4, 6], "white", [1, 1]).length).toEqual(0);
       expect(testBoard._positionsToFlip([4, 6], "white", [1, -1]).length).toEqual(0);
-    })
+    });
 
     it("returns empty array if no pieces of the opposite color are found", function () {
       let traversalDoesntFlipTestBoard = new Board();
@@ -161,50 +161,50 @@ describe("Board", function () {
       expect(testBoard._positionsToFlip([5, 3], "white", [1, -1]).length).toEqual(0);
     });
 
-    
+
     beforeEach(function () {
       testBoardLongHorzDiagonal = new Board();
 
-      testBoardLongHorzDiagonal.grid[1][1] = new Piece("black")
-      testBoardLongHorzDiagonal.grid[1][3] = new Piece("black")
-      testBoardLongHorzDiagonal.grid[1][4] = new Piece("white")
-      testBoardLongHorzDiagonal.grid[1][6] = new Piece("white")
-      testBoardLongHorzDiagonal.grid[1][7] = new Piece("white")
+      testBoardLongHorzDiagonal.grid[1][1] = new Piece("black");
+      testBoardLongHorzDiagonal.grid[1][3] = new Piece("black");
+      testBoardLongHorzDiagonal.grid[1][4] = new Piece("white");
+      testBoardLongHorzDiagonal.grid[1][6] = new Piece("white");
+      testBoardLongHorzDiagonal.grid[1][7] = new Piece("white");
 
-      testBoardLongHorzDiagonal.grid[2][0] = new Piece("black")
-      testBoardLongHorzDiagonal.grid[2][2] = new Piece("white")
-      testBoardLongHorzDiagonal.grid[2][3] = new Piece("white")
-      testBoardLongHorzDiagonal.grid[2][4] = new Piece("black")
-      testBoardLongHorzDiagonal.grid[2][5] = new Piece("black")
-      testBoardLongHorzDiagonal.grid[2][7] = new Piece("black")
+      testBoardLongHorzDiagonal.grid[2][0] = new Piece("black");
+      testBoardLongHorzDiagonal.grid[2][2] = new Piece("white");
+      testBoardLongHorzDiagonal.grid[2][3] = new Piece("white");
+      testBoardLongHorzDiagonal.grid[2][4] = new Piece("black");
+      testBoardLongHorzDiagonal.grid[2][5] = new Piece("black");
+      testBoardLongHorzDiagonal.grid[2][7] = new Piece("black");
 
-      testBoardLongHorzDiagonal.grid[3][0] = new Piece("black")
-      testBoardLongHorzDiagonal.grid[3][2] = new Piece("white")
-      testBoardLongHorzDiagonal.grid[3][3] = new Piece("white")
-      testBoardLongHorzDiagonal.grid[3][4] = new Piece("black")
-      testBoardLongHorzDiagonal.grid[3][5] = new Piece("black")
-      testBoardLongHorzDiagonal.grid[3][7] = new Piece("black")
+      testBoardLongHorzDiagonal.grid[3][0] = new Piece("black");
+      testBoardLongHorzDiagonal.grid[3][2] = new Piece("white");
+      testBoardLongHorzDiagonal.grid[3][3] = new Piece("white");
+      testBoardLongHorzDiagonal.grid[3][4] = new Piece("black");
+      testBoardLongHorzDiagonal.grid[3][5] = new Piece("black");
+      testBoardLongHorzDiagonal.grid[3][7] = new Piece("black");
 
-      testBoardLongHorzDiagonal.grid[4][0] = new Piece("black")
-      testBoardLongHorzDiagonal.grid[4][1] = new Piece("black")
-      testBoardLongHorzDiagonal.grid[4][3] = new Piece("black")
-      testBoardLongHorzDiagonal.grid[4][4] = new Piece("white")
-      testBoardLongHorzDiagonal.grid[4][6] = new Piece("white")
-      testBoardLongHorzDiagonal.grid[4][7] = new Piece("black")
+      testBoardLongHorzDiagonal.grid[4][0] = new Piece("black");
+      testBoardLongHorzDiagonal.grid[4][1] = new Piece("black");
+      testBoardLongHorzDiagonal.grid[4][3] = new Piece("black");
+      testBoardLongHorzDiagonal.grid[4][4] = new Piece("white");
+      testBoardLongHorzDiagonal.grid[4][6] = new Piece("white");
+      testBoardLongHorzDiagonal.grid[4][7] = new Piece("black");
 
-      testBoardLongHorzDiagonal.grid[5][0] = new Piece("white")
+      testBoardLongHorzDiagonal.grid[5][0] = new Piece("white");
 
-      testBoardLongHorzDiagonal.grid[6][2] = new Piece("white")
-      testBoardLongHorzDiagonal.grid[6][3] = new Piece("white")
-      testBoardLongHorzDiagonal.grid[6][4] = new Piece("white")
-      testBoardLongHorzDiagonal.grid[6][5] = new Piece("white")
-      testBoardLongHorzDiagonal.grid[6][6] = new Piece("black")
+      testBoardLongHorzDiagonal.grid[6][2] = new Piece("white");
+      testBoardLongHorzDiagonal.grid[6][3] = new Piece("white");
+      testBoardLongHorzDiagonal.grid[6][4] = new Piece("white");
+      testBoardLongHorzDiagonal.grid[6][5] = new Piece("white");
+      testBoardLongHorzDiagonal.grid[6][6] = new Piece("black");
 
-      testBoardLongHorzDiagonal.grid[7][1] = new Piece("black")
-      testBoardLongHorzDiagonal.grid[7][2] = new Piece("white")
-      testBoardLongHorzDiagonal.grid[7][3] = new Piece("white")
-      testBoardLongHorzDiagonal.grid[7][4] = new Piece("white")
-      testBoardLongHorzDiagonal.grid[7][5] = new Piece("white")
+      testBoardLongHorzDiagonal.grid[7][1] = new Piece("black");
+      testBoardLongHorzDiagonal.grid[7][2] = new Piece("white");
+      testBoardLongHorzDiagonal.grid[7][3] = new Piece("white");
+      testBoardLongHorzDiagonal.grid[7][4] = new Piece("white");
+      testBoardLongHorzDiagonal.grid[7][5] = new Piece("white");
 
     });
 
@@ -225,7 +225,7 @@ describe("Board", function () {
 
       expect(JSON.stringify(testBoardLongHorzDiagonal._positionsToFlip([0, 2], "white", [1, 1]))).toEqual(JSON.stringify([[1, 3], [2, 4], [3, 5]]));
       expect(JSON.stringify(testBoardLongHorzDiagonal._positionsToFlip([0, 5], "black", [1, -1]))).toEqual(JSON.stringify([[1, 4], [2, 3], [3, 2]]));
-    })
+    });
 
   });
 
@@ -259,7 +259,7 @@ describe("Board", function () {
         testBoard.placePiece([3, 3], "white");
       }
       expect(makeBadMove).toThrow(new Error("Invalid move!"));
-      
+
     });
 
     it("should not allow a move that doesn't capture", function () {
@@ -274,7 +274,7 @@ describe("Board", function () {
         testBoard.placePiece([0, 0], "white");
       }
       expect(makeOtherBadMove).toThrow(new Error("Invalid move!"));
-      
+
     });
   });
 
@@ -325,4 +325,3 @@ describe("Board", function () {
     });
   });
 });
-   
