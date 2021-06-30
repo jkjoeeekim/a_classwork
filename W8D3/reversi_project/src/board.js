@@ -1,5 +1,5 @@
 // DON'T TOUCH THIS CODE
-if (typeof window === 'undefined'){
+if (typeof window === 'undefined') {
   var Piece = require("./piece");
 }
 // DON'T TOUCH THIS CODE
@@ -8,20 +8,25 @@ if (typeof window === 'undefined'){
  * Returns a 2D array (8 by 8) with two black pieces at [3, 4] and [4, 3]
  * and two white pieces at [3, 3] and [4, 4]
  */
-function _makeGrid () {
+function _makeGrid() {
+  const grid = [];
+  for (let i = 0; i < 8; i ++) {
+    grid.push(new Array(8));
+  };
+  return grid;
 }
 
 /**
  * Constructs a Board with a starting grid set up.
  */
-function Board () {
+function Board() {
   this.grid = _makeGrid();
 }
 
 Board.DIRS = [
-  [ 0,  1], [ 1,  1], [ 1,  0],
-  [ 1, -1], [ 0, -1], [-1, -1],
-  [-1,  0], [-1,  1]
+  [0, 1], [1, 1], [1, 0],
+  [1, -1], [0, -1], [-1, -1],
+  [-1, 0], [-1, 1]
 ];
 
 /**
@@ -63,7 +68,7 @@ Board.prototype.isOccupied = function (pos) {
  *
  * Returns empty array if no pieces of the opposite color are found.
  */
-Board.prototype._positionsToFlip = function(pos, color, dir, piecesToFlip){
+Board.prototype._positionsToFlip = function (pos, color, dir, piecesToFlip) {
 };
 
 /**
@@ -116,7 +121,7 @@ Board.prototype.print = function () {
 
 
 // DON'T TOUCH THIS CODE
-if (typeof window === 'undefined'){
+if (typeof window === 'undefined') {
   module.exports = Board;
 }
 // DON'T TOUCH THIS CODE
