@@ -5,6 +5,22 @@
   position: relative;
   border-radius: 2%;
   border: 1px solid black;
+  overflow: hidden;
+}
+
+.online {
+  font-weight: 800;
+  width: 150px;
+  padding: 5px;
+  font-size: 13px;
+  color: white;
+  letter-spacing: 3px;
+  background-color: rgb(0, 207, 0);
+  position: absolute;
+  transform: translateY(15px) translateX(-45px) rotate(-45deg);
+  text-align: center;
+  box-sizing: border-box;
+  box-shadow: 10px 1px rgb(0, 110, 0);
 }
 
 .profile-info {

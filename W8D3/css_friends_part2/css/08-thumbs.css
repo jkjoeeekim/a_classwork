@@ -1,2 +1,26 @@
 /* PHASE 2: Thumbs */
 
+.thumb {
+  display: flex;
+}
+
+.thumb ul {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.thumb ul img {
+  flex-direction: row;
+  width: 58px;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.thumb ul li {
+  padding-bottom: 10px;
+}
+
+.thumb li:nth-child(3n + 2) {
+  padding-right: 10px;
+  padding-left: 10px;
+}
