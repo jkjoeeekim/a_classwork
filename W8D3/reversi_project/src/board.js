@@ -39,7 +39,6 @@ Board.DIRS = [
  * Checks if a given position is on the Board.
  */
 Board.prototype.isValidPos = function (pos) {
-  debugger;
   let temp = true;
   pos.forEach(function (idx) {
     if (idx < 0 || idx > 7) {
@@ -99,25 +98,30 @@ Board.prototype.isOccupied = function (pos) {
  *
  * Returns empty array if no pieces of the opposite color are found.
  */
-Board.prototype._positionsToFlip = function (pos, color, dir, piecesToFlip) {
-  // if (Board.DIRS.includes(dir)) {
-  //   throw new Error('Invalid direction')
-  // };
-
-  if (!this.isValidPos(pos)) {
-    return [];
-  };
+Board.prototype._positionsToFlip = function (pos, color, dir, piecesToFlip = []) {
   let newPos = [];
-  let flipPieces = [];
-
   newPos.push(pos[0] + dir[0]);
   newPos.push(pos[1] + dir[1]);
-
-  if (!this.isMine(newPos, color)) {
-    flipPieces.push(this.getPiece(newPos))
+  // (this.isValidPos(pos) === false) || 
+  if ((this.isValidPos(newPos) === false)) {
+    // piecesToFlip = [];
+    // return piecesToFlip;
+    return [];
+  } else if (this.isOccupied(newPos) === false) {
+    // piecesToFlip = [];
+    // return piecesToFlip;
+    return [];
   };
+      
+  if(this.isMine(newPos, color)) {
+    return piecesToFlip;
+  } else {
+    piecesToFlip.push(newPos);
+  } 
+  // piecesToFlip = this._positionsToFlip(newPos, color, dir, piecesToFlip)
+  // return piecesToFlip;
 
-  return flipPieces.concat(this._positionsToFlip(newPos, color, dir, flipPieces))
+  return this._positionsToFlip(newPos, color, dir, piecesToFlip);
 };
 
 /**
@@ -126,6 +130,25 @@ Board.prototype._positionsToFlip = function (pos, color, dir, piecesToFlip) {
  * color being flipped.
  */
 Board.prototype.validMove = function (pos, color) {
+  if(this.isOccupied(pos) || !this.isValidPos(pos)) {
+    return false;
+  }
+
+  let valid = false;
+  
+  Board.DIRS.forEach((dir) => {
+    let possiblePos = this._positionsToFlip(pos, color, dir);
+    console.log(this.grid);
+
+    console.log(pos);
+    console.log(color);
+    console.log(possiblePos);
+    if(possiblePos.length > 0) {
+      valid = true;
+    }
+  })
+
+  return valid;
 };
 
 /**
