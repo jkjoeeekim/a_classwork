@@ -91,7 +91,7 @@ let addNumbers = (sum, numsLeft, completionCallback) => {
 
 
 // my absurd bubble sort method using reader
-function askIfGreaterThan(el1, el2, callback) {
+let askIfGreaterThan = (el1, el2, callback) => {
   reader.question(`Is ${el1} greater than ${el2}?\n`, (answer) => {
     if (answer === 'yes') {
       callback(true);
@@ -130,6 +130,7 @@ let absurdBubbleSort = (arr, sortCompletionCallback) => {
       innerBubbleSortLoop(arr, 0, true, outerBubbleSortLoop);
     } else {
       sortCompletionCallback(arr);
+      reader.close();
     }
   }
   outerBubbleSortLoop(true);
@@ -139,3 +140,31 @@ let absurdBubbleSort = (arr, sortCompletionCallback) => {
 //   console.log("Sorted array: " + JSON.stringify(arr));
 //   reader.close();
 // });
+
+
+// create my own bind function
+Function.prototype.myBind = function(context) {
+  return () => {
+    this.apply(context);
+  }
+};
+
+class Lamp {
+  constructor() {
+    this.name = "a lamp";
+  }
+}
+
+const turnOn = function () {
+  console.log("Turning on " + this.name);
+};
+
+// const lamp = new Lamp();
+
+// turnOn(); // should not work the way we want it to
+
+// const boundTurnOn = turnOn.bind(lamp);
+// const myBoundTurnOn = turnOn.myBind(lamp);
+
+// boundTurnOn(); // should say "Turning on a lamp"
+// myBoundTurnOn(); // should say "Turning on a lamp"
