@@ -140,5 +140,55 @@ function curriedSum(numArgs) {
 
 // // or more briefly:
 
-const sum3 = curriedSum(4);
-sum3(5)(30)(20)(1); // => 56
+// const sum3 = curriedSum(4);
+// sum3(5)(30)(20)(1); // => 56
+
+
+
+// Monkey patching curriedSum ES5
+Function.prototype.curry = function (numArgs) {
+  let numbers = [];
+  let fnc = this;
+  function _currySum(num) {
+    numbers.push(num);
+    if (numbers.length === numArgs) {
+      return fnc(...numbers);
+      // return fnc.apply(null, numbers);
+      // return fnc.call(null, ...numbers);
+    } else {
+      return _currySum;
+    }
+  };
+
+  return _currySum;
+};
+
+// Monkey patching curriedSum2 ES6
+Function.prototype.curry2 = function (numArgs) {
+  let numbers = [];
+  let _currySum = (num) => {
+    numbers.push(num);
+    if (numbers.length === numArgs) {
+      return this(...numbers);
+    } else {
+      return _currySum;
+    }
+  };
+
+  return _currySum;
+};
+
+const curryAdd = function (...arr) {
+  console.log(arr);
+  let count = 0;
+  arr.forEach((ele) => {
+    count += ele;
+  });
+  return count;
+};
+
+let addAll = curryAdd.curry(4);
+console.log(addAll(5)(30)(20)(1)); // => 56
+
+let addAll2 = curryAdd.curry2(4);
+console.log(addAll2(5)(30)(20)(1)); // => 56
