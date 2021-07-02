@@ -62,35 +62,83 @@ class Dog {
   }
 }
 
-const markov = new Cat("Markov");
-const pavlov = new Dog("Pavlov");
+// const markov = new Cat("Markov");
+// const pavlov = new Dog("Pavlov");
 
-markov.says("meow", "Ned");
-// Markov says meow to Ned!
+// markov.says("meow", "Ned");
+// // Markov says meow to Ned!
+// // true
+
+// // bind time args are "meow" and "Kush", no call time args
+// markov.says.myBind(pavlov, "meow", "Kush")();
+// markov.says.myBind2(pavlov, "meow", "Kush")();
+// // Pavlov says meow to Kush!
+// // true
+
+// // no bind time args (other than context), call time args are "meow" and "a tree"
+// markov.says.myBind(pavlov)("meow", "a tree");
+// markov.says.myBind2(pavlov)("meow", "a tree");
+// // Pavlov says meow to a tree!
+// // true
+
+// // bind time arg is "meow", call time arg is "Markov"
+// markov.says.myBind(pavlov, "meow")("Markov");
+// markov.says.myBind2(pavlov, "meow")("Markov");
+// // Pavlov says meow to Markov!
+// // true
+
+// // no bind time args (other than context), call time args are "meow" and "me"
+// const notMarkovSays = markov.says.myBind(pavlov);
+// const notMarkovSays2 = markov.says.myBind2(pavlov);
+// notMarkovSays("meow", "me");
+// notMarkovSays2("meow", "me");
+// // Pavlov says meow to me!
 // true
 
-// bind time args are "meow" and "Kush", no call time args
-markov.says.myBind(pavlov, "meow", "Kush")();
-markov.says.myBind2(pavlov, "meow", "Kush")();
-// Pavlov says meow to Kush!
-// true
 
-// no bind time args (other than context), call time args are "meow" and "a tree"
-markov.says.myBind(pavlov)("meow", "a tree");
-markov.says.myBind2(pavlov)("meow", "a tree");
-// Pavlov says meow to a tree!
-// true
+//sumThree Curried Version
 
-// bind time arg is "meow", call time arg is "Markov"
-markov.says.myBind(pavlov, "meow")("Markov");
-markov.says.myBind2(pavlov, "meow")("Markov");
-// Pavlov says meow to Markov!
-// true
+// Hint: curriedSum(numArgs) should:
 
-// no bind time args (other than context), call time args are "meow" and "me"
-const notMarkovSays = markov.says.myBind(pavlov);
-const notMarkovSays2 = markov.says.myBind2(pavlov);
-notMarkovSays("meow", "me");
-notMarkovSays2("meow", "me");
-// Pavlov says meow to me!
-// true
+// Define an empty array, numbers.
+// Defines a function, _curriedSum that:
+// Closes over numArgs and numbers.
+// Takes a single number as an argument.
+// Appends this to numbers each time.
+// If numbers.length === numArgs, it sums the numbers in the array and returns the result.
+//   Else, it returns itself.
+// Returns _curriedSum.
+// If you're confused, think of it this way: _curriedSum keeps collecting arguments and returning itself 
+// until it has enough arguments, at which point it actually does the required work of summing.
+
+// function sumThree(num1, num2, num3) {
+//   return num1 + num2 + num3;
+// }
+
+// sumThree(4, 20, 6); // == 30
+
+function curriedSum(numArgs) {
+  let numbers = [];
+  return function _curriedSum(num) {
+    if (numbers.length === numArgs -1) {
+      let count = num;
+      numbers.forEach((num) => { count += num });
+      console.log(count)
+      return count;
+    } else {
+      numbers.push(num);
+      return _curriedSum;
+    }
+  };
+};
+
+// you'll write `Function#curry`!
+// let f1 = sumThree.curry(3); // tells `f1` to wait until 3 arguments are given before running `sumThree`
+// f1 = f1(4); // [Function]
+// f1 = f1(20); // [Function]
+// f1 = f1(6); // = 30
+
+// // or more briefly:
+
+const sum3 = curriedSum(4);
+sum3(5)(30)(20)(1); // => 56
