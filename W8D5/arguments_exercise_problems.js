@@ -30,7 +30,7 @@ Function.prototype.myBind = function (context) {
   let that = this;
   let outerArgs = Array.from(arguments).slice(1);
 
-  return function() {
+  return function () {
     let innerArgs = Array.from(arguments);
     that.apply(context, outerArgs.concat(innerArgs));
   };
@@ -120,10 +120,10 @@ class Dog {
 function curriedSum(numArgs) {
   let numbers = [];
   return function _curriedSum(num) {
-    if (numbers.length === numArgs -1) {
+    if (numbers.length === numArgs - 1) {
       let count = num;
-      numbers.forEach((num) => { count += num });
-      console.log(count)
+      numbers.forEach((num) => { count += num; });
+      console.log(count);
       return count;
     } else {
       numbers.push(num);
