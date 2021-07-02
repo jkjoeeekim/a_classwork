@@ -65,11 +65,11 @@ class Clock {
 
 
 // Using readline to get user prompt
-readline = require('readline');
-reader = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout
-});
+// readline = require('readline');
+// reader = readline.createInterface({
+//   input: process.stdin,
+//   output: process.stdout
+// });
 
 // simple adding numbers function using reader
 let addNumbers = (sum, numsLeft, completionCallback) => {
@@ -102,7 +102,7 @@ let askIfGreaterThan = (el1, el2, callback) => {
       askIfGreaterThan(el1, el2, callback);
     }
   });
-}
+};
 
 let innerBubbleSortLoop = (arr, i, madeAnySwaps, outerBubbleSortLoop) => {
   if (i === arr.length - 1) {
@@ -143,10 +143,10 @@ let absurdBubbleSort = (arr, sortCompletionCallback) => {
 
 
 // create my own bind function
-Function.prototype.myBind = function(context) {
+Function.prototype.myBind = function (context) {
   return () => {
     this.apply(context);
-  }
+  };
 };
 
 class Lamp {
@@ -159,12 +159,81 @@ const turnOn = function () {
   console.log("Turning on " + this.name);
 };
 
-// const lamp = new Lamp();
+const lamp = new Lamp();
 
 // turnOn(); // should not work the way we want it to
 
-// const boundTurnOn = turnOn.bind(lamp);
-// const myBoundTurnOn = turnOn.myBind(lamp);
+const boundTurnOn = turnOn.bind(lamp);
+const myBoundTurnOn = turnOn.myBind(lamp);
 
 // boundTurnOn(); // should say "Turning on a lamp"
 // myBoundTurnOn(); // should say "Turning on a lamp"
+
+
+
+// Create myThrottle and myDebounce
+Function.prototype.myThrottle = function (interval) {
+  let tooSoon = false;
+
+  return () => {
+    if (!tooSoon) {
+      tooSoon = true;
+      this();
+      setTimeout(() => {
+        tooSoon = false;
+      }, interval);
+    }
+  }
+};
+
+class Neuron {
+  fire() {
+    console.log("Firing!");
+  }
+}
+const neuron = new Neuron();
+neuron.fire = neuron.fire.myThrottle(500);
+const interval = setInterval(() => {
+  neuron.fire();
+}, 10);
+
+// const neuron = new Neuron();
+// // When we create a new Neuron,
+// // we can call #fire as frequently as we want
+
+// // The following code will try to #fire the neuron every 10ms. Try it in the console:
+// const interval = setInterval(() => {
+//   neuron.fire();
+// }, 10);
+
+// // You can use clearInterval to stop the firing:
+// clearInterval(interval);
+
+// Using Function#myThrottle, we should be able to throttle
+// the #fire function of our neuron so that it can only fire
+// once every 500ms:
+
+// neuron.fire = neuron.fire.myThrottle(500);
+
+// const interval = setInterval(() => {
+//   neuron.fire;
+// }, 10);
+
+// This time, if our Function#myThrottle worked correctly,
+// the Neuron#fire function should only be able to execute
+// every 500ms, even though we're still trying to invoke it
+// every 10ms!
+
+// If we want this behavior for ALL neurons, we can do the same logic in the constructor:
+
+// class Neuron {
+//   constructor() {
+//     this.fire = this.fire.myThrottle(500);
+//   }
+
+//   fire() {
+//     console.log("Firing!");
+//   }
+// }
+// const neuron = new Neuron();
+// neuron.fire;
