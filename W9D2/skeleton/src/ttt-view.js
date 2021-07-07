@@ -1,7 +1,13 @@
 const Board = require("../ttt_node/board.js")
 
 class View {
-  constructor(game, el) {}
+  constructor(game, el) {
+    this.game = game;
+    this.el = el;
+    this.ul = this.setupBoard();
+    this.el.append(this.ul);
+    this.bindEvents();
+  }
 
   setupBoard() {
     const ul = document.createElement("ul");
@@ -12,15 +18,39 @@ class View {
         ul.append(li);
       }
     }
+    return ul;
   }
   
-  bindEvents() {}
+  bindEvents() {
+    console.log(this);
+    console.log(this.ul);
+    this.ul.addEventListener("click", (e) => this.handleClick(e));
+  }
 
-  handleClick(e) {}
+  handleClick(e) {
+    let pos = e.target.dataset.position;
+    console.log(pos);
+    this.makeMove(JSON.parse(pos));
+    e.target.innerText = this.game.currentPlayer;
+    e.target.classList = ("clicked");
+  }
 
-  makeMove(square) {}
+  makeMove(square) {
+    try{
+      this.game.playMove(square);
+    }catch(error){
+      // console.log(error);
+      alert(error.msg);
+    }
+    if(this.game.winner()){
+        
+    }else if(this.game.isOver()){
+      console.log(this.ul);
+    }else{
+      console.log(this.game.currentPlayer);
+    }
+  }
 
 }
-let v1 = new View
-v1.setupBoard();
+
 module.exports = View;

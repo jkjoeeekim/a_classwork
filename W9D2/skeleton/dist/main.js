@@ -15,7 +15,7 @@
   \**********************/
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("const View = __webpack_require__(/*! ./ttt-view.js */ \"./src/ttt-view.js\");\nconst Game = __webpack_require__(/*! ../ttt_node/game.js */ \"./ttt_node/game.js\");\n\ndocument.addEventListener(\"DOMContentLoaded\", () => {\n  // Your code here\n});\n\n\n//# sourceURL=webpack:///./src/index.js?");
+eval("const View = __webpack_require__(/*! ./ttt-view.js */ \"./src/ttt-view.js\");\nconst Game = __webpack_require__(/*! ../ttt_node/game.js */ \"./ttt_node/game.js\");\n\ndocument.addEventListener(\"DOMContentLoaded\", () => {\n  // Your code here\n  let g1 = new Game;\n  const container = document.querySelector(\".ttt\");\n  let v1 = new View(g1,container);\n});\n\n\n//# sourceURL=webpack:///./src/index.js?");
 
 /***/ }),
 
@@ -25,7 +25,7 @@ eval("const View = __webpack_require__(/*! ./ttt-view.js */ \"./src/ttt-view.js\
   \*************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("const Board = __webpack_require__(/*! ../ttt_node/board.js */ \"./ttt_node/board.js\")\n\nclass View {\n  constructor(game, el) {}\n\n  setupBoard() {\n    const ul = document.createElement(\"ul\");\n    for (let x = 0; x < 3; x++) {\n      for (let y = 0; y < 3; y++) {\n        const li = document.createElement(\"li\");\n        li.dataset.position = JSON.stringify([x, y]);\n        ul.append(li);\n      }\n    }\n  }\n  \n  bindEvents() {}\n\n  handleClick(e) {}\n\n  makeMove(square) {}\n\n}\nlet v1 = new View\nv1.setupBoard();\nmodule.exports = View;\n\n\n//# sourceURL=webpack:///./src/ttt-view.js?");
+eval("const Board = __webpack_require__(/*! ../ttt_node/board.js */ \"./ttt_node/board.js\")\n\nclass View {\n  constructor(game, el) {\n    this.game = game;\n    this.el = el;\n    this.ul = this.setupBoard();\n    this.el.append(this.ul);\n    this.bindEvents();\n  }\n\n  setupBoard() {\n    const ul = document.createElement(\"ul\");\n    for (let x = 0; x < 3; x++) {\n      for (let y = 0; y < 3; y++) {\n        const li = document.createElement(\"li\");\n        li.dataset.position = JSON.stringify([x, y]);\n        ul.append(li);\n      }\n    }\n    return ul;\n  }\n  \n  bindEvents() {\n    console.log(this);\n    console.log(this.ul);\n    this.ul.addEventListener(\"click\", (e) => this.handleClick(e));\n  }\n\n  handleClick(e) {\n    let pos = e.target.dataset.position;\n    console.log(pos);\n    this.makeMove(JSON.parse(pos));\n    e.target.innerText = this.game.currentPlayer;\n    e.target.classList = (\"clicked\");\n  }\n\n  makeMove(square) {\n    try{\n      this.game.playMove(square);\n    }catch(error){\n      // console.log(error);\n      alert(error.msg);\n    }\n    if(this.game.winner()){\n        \n    }else if(this.game.isOver()){\n      console.log(this.ul);\n    }else{\n      console.log(this.game.currentPlayer);\n    }\n  }\n\n}\n\nmodule.exports = View;\n\n\n//# sourceURL=webpack:///./src/ttt-view.js?");
 
 /***/ }),
 
