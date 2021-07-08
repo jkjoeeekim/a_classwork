@@ -1,7 +1,6 @@
 html {
   background-color: grey;
 }
-
 ul {
   display: flex;
   width: 650px;
@@ -30,10 +29,22 @@ li:hover {
 
 .winner {
   color: white;
-  background-color: greem;
+  background-color: green;
+  pointer-events: none;
 }
 
 .loser {
   color: red;
   background-color: white;
+  pointer-events: none;
+}
+
+.empty {
+  pointer-events: none;
+}
+
+h2 {
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: bolder;
 }

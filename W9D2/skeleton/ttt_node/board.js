@@ -79,6 +79,7 @@ class Board {
 
   winnerHelper(posSeq) {
     for (let markIdx = 0; markIdx < Board.marks.length; markIdx++) {
+      
       const targetMark = Board.marks[markIdx];
       let winner = true;
       for (let posIdx = 0; posIdx < 3; posIdx++) {
@@ -89,8 +90,9 @@ class Board {
           winner = false;
         }
       }
-
+  
       if (winner) {
+        console.log(targetMark);
         return targetMark;
       }
     }
