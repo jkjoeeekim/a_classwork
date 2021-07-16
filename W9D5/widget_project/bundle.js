@@ -43,15 +43,43 @@ var Clock = /*#__PURE__*/function (_React$Component) {
   var _super = _createSuper(Clock);
 
   function Clock(props) {
+    var _this;
+
     _classCallCheck(this, Clock);
 
-    return _super.call(this, props);
+    _this = _super.call(this, props);
+    var date = new Date();
+    _this.state = {
+      time: "".concat(date.getHours(), ":").concat(date.getMinutes(), ":").concat(date.getSeconds()),
+      date: "".concat(date.toDateString())
+    };
+    _this.tick = _this.tick.bind(_assertThisInitialized(_this));
+
+    var that = _assertThisInitialized(_this);
+
+    _this.timer = setInterval(function () {
+      that.tick();
+    }, 1000); // setTimeout(() => {
+    //   clearInterval(this.timer)  
+    // }, 3000);
+
+    return _this;
   }
 
   _createClass(Clock, [{
+    key: "tick",
+    value: function tick() {
+      var date = new Date();
+      this.setState({
+        time: "".concat(date.getHours(), ":").concat(date.getMinutes(), ":").concat(date.getSeconds())
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "Rolex");
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "clock-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Time:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, " ", this.state.time), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Date:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, this.state.date));
     }
   }]);
 
