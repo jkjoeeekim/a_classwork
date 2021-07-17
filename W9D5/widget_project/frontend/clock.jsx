@@ -38,17 +38,19 @@ class Clock extends React.Component {
   render() {
     return (
       <section className='clock-container'>
-
-        <section id="clock-left-side">
-          <p id="time">Time:</p>
-          <p id="date">Date:</p>
+        <section id="clock-title-container" class="title">
+          <p id="">Clock</p>
         </section>
-
-        <section id="clock-right-side">
-          <p id="time-value">{this.state.time}</p>
-          <p id="date-value">{this.state.date}</p>
+        <section id="clock-details-container">
+          <section id="clock-left-side">
+            <p id="time">Time:</p>
+            <p id="date">Date:</p>
+          </section>
+          <section id="clock-right-side">
+            <p id="time-value">{this.state.time}</p>
+            <p id="date-value">{this.state.date}</p>
+          </section>
         </section>
-
       </section>
     )
   }
