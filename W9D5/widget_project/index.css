@@ -1,0 +1,30 @@
+html {
+  font-family: 'Fira Sans', sans-serif;
+}
+
+.clock-container {
+  display: flex;
+  width: 400px;
+  margin: 0 auto;
+  margin-top: 50px;
+  flex-direction: row;
+  justify-content: space-between;
+  border: 2px solid black;
+  background-color:bisque;
+  padding: 25px;
+}
+
+#clock-left-side {
+}
+
+#clock-right-side {
+  text-align: right;
+}
+
+p {
+  font-size: 36px;
+}
+
+section p:first-child {
+  margin-bottom: 15px;
+}
