@@ -18,7 +18,7 @@ export default class Game extends React.Component {
 
   render() {
     return (
-      <Board board={this.state.board} updateGame={this.updateGame} />
+      <Board board={this.state.board} updateGame={this.updateGame} alt={this.props.alt} />
     )
   }
 }

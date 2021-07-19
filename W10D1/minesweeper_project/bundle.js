@@ -55,9 +55,9 @@ var Board = /*#__PURE__*/function (_React$Component) {
     value: function createRow(row) {
       var _this = this;
 
-      console.log(row);
       return row.map(function (ele, idx) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_tile__WEBPACK_IMPORTED_MODULE_1__.default, {
+          alt: _this.props.alt,
           content: ele,
           updateGame: _this.props.updateGame,
           key: idx
@@ -158,7 +158,8 @@ var Game = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_board__WEBPACK_IMPORTED_MODULE_1__.default, {
         board: this.state.board,
-        updateGame: this.updateGame
+        updateGame: this.updateGame,
+        alt: this.props.alt
       });
     }
   }]);
@@ -379,15 +380,70 @@ var Tile = /*#__PURE__*/function (_React$Component) {
   var _super = _createSuper(Tile);
 
   function Tile(props) {
+    var _this;
+
     _classCallCheck(this, Tile);
 
-    return _super.call(this, props);
+    _this = _super.call(this, props);
+    _this.state = {
+      status: 'tile-unclicked',
+      alt: false
+    };
+    _this.clearing = false;
+
+    _this.keypress = function (event) {};
+
+    _this.clickTile = _this.clickTile.bind(_assertThisInitialized(_this));
+
+    var that = _assertThisInitialized(_this);
+
+    document.addEventListener("keydown", function (e) {
+      if (e.altKey) {
+        that.setState({
+          alt: true
+        });
+
+        if (!that.clearing) {
+          that.clearing = true;
+          setTimeout(function () {
+            that.state.alt = false;
+            that.clearing = false;
+          }, 100);
+        }
+      }
+    }); // document.addEventListener("keyup", function(e) {
+    //   if (e.altKey) {
+    //     console.log('keyup', e)
+    //     that.state.alt = false;
+    //   }
+    // })
+
+    return _this;
   }
 
   _createClass(Tile, [{
+    key: "clickTile",
+    value: function clickTile() {
+      var that = this;
+
+      if (this.state.alt) {
+        this.setState({
+          status: 'tile-flag'
+        });
+      } else {
+        this.setState({
+          status: 'tile-clicked'
+        });
+      }
+    } // keypress(e) {
+    //   console.log(e)
+    // }
+
+  }, {
     key: "render",
     value: function render() {
-      var content = '_';
+      var that = this;
+      var content = ' ';
 
       if (this.props.content.bombed) {
         content = "B";
@@ -397,7 +453,13 @@ var Tile = /*#__PURE__*/function (_React$Component) {
         content = "F";
       }
 
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, content);
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+        className: this.state.status,
+        onKeyPress: that.keypress,
+        onClick: function onClick() {
+          that.clickTile();
+        }
+      }, content);
     }
   }]);
 
@@ -30287,6 +30349,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_game__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/game */ "./components/game.jsx");
 
 
+ // let alt = false;
 
 document.addEventListener("DOMContentLoaded", function () {
   var root = document.getElementById("root");

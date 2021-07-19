@@ -8,10 +8,9 @@ export default class Board  extends React.Component {
   }
 
   createRow(row) {
-    console.log(row)
     return row.map((ele, idx) => {
       return (
-        <Tile content={ele} updateGame={this.props.updateGame} key={idx} />
+        <Tile alt={this.props.alt} content={ele} updateGame={this.props.updateGame} key={idx} />
       )
     })
 
