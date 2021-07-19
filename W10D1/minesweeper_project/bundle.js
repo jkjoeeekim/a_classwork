@@ -47,7 +47,9 @@ var Board = /*#__PURE__*/function (_React$Component) {
   function Board(props) {
     _classCallCheck(this, Board);
 
-    return _super.call(this, props); //2d array as state
+    return _super.call(this, props); // this.state = {
+    //   msg: null
+    // }
   }
 
   _createClass(Board, [{
@@ -58,7 +60,7 @@ var Board = /*#__PURE__*/function (_React$Component) {
       return row.map(function (ele, idx) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_tile__WEBPACK_IMPORTED_MODULE_1__.default, {
           alt: _this.props.alt,
-          content: ele,
+          tile: ele,
           updateGame: _this.props.updateGame,
           key: idx
         });
@@ -80,7 +82,7 @@ var Board = /*#__PURE__*/function (_React$Component) {
         // <Tile updateGame={this.props.updateGame} />
         react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "board-display"
-        }, board)
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, this.props.msg), board)
       );
     }
   }]);
@@ -143,6 +145,8 @@ var Game = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
     _this.state = {
+      alt: false,
+      msg: null,
       board: new Minesweeper.Board(10, 10)
     };
     _this.updateGame = _this.updateGame.bind(_assertThisInitialized(_this));
@@ -151,15 +155,25 @@ var Game = /*#__PURE__*/function (_React$Component) {
 
   _createClass(Game, [{
     key: "updateGame",
-    value: function updateGame() {// return true;
+    value: function updateGame() {
+      if (this.state.board.won()) {
+        this.setState({
+          msg: 'Victory!'
+        });
+      } else if (this.state.board.lost()) {
+        this.setState({
+          msg: 'Defeat'
+        });
+      }
     }
   }, {
     key: "render",
     value: function render() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_board__WEBPACK_IMPORTED_MODULE_1__.default, {
         board: this.state.board,
+        msg: this.state.msg,
         updateGame: this.updateGame,
-        alt: this.props.alt
+        alt: this.state.alt
       });
     }
   }]);
@@ -389,7 +403,6 @@ var Tile = /*#__PURE__*/function (_React$Component) {
       status: 'tile-unclicked',
       alt: false
     };
-    _this.clearing = false;
 
     _this.keypress = function (event) {};
 
@@ -399,14 +412,13 @@ var Tile = /*#__PURE__*/function (_React$Component) {
 
     document.addEventListener("keydown", function (e) {
       if (e.altKey) {
+        // that.setState({ alt: true })
         that.state.alt = true;
       }
     });
     document.addEventListener("keyup", function (e) {
-      console.log(e);
-
       if (e.key === "Alt") {
-        console.log('keyup', e);
+        // that.setState({ alt: false })
         that.state.alt = false;
       }
     });
@@ -416,34 +428,38 @@ var Tile = /*#__PURE__*/function (_React$Component) {
   _createClass(Tile, [{
     key: "clickTile",
     value: function clickTile(e) {
-      // console.log(e)
       console.log(this.state.alt);
       var that = this;
+      if (this.props.tile.flagged || this.props.tile.explored) return;
 
       if (this.state.alt) {
+        this.props.tile.toggleFlag(); // console.log(this.props.tile)
+
         this.setState({
           status: 'tile-flag'
         });
       } else {
+        this.props.tile.explore(); // console.log(this.props.tile);
+
         this.setState({
           status: 'tile-clicked'
         });
       }
 
-      this.props.updateGame(this, this.state.alt);
+      this.props.updateGame();
     }
   }, {
     key: "render",
     value: function render() {
       var that = this;
-      var content = ' ';
+      var tile = ' ';
 
-      if (this.props.content.bombed) {
-        content = "B";
-      } else if (this.props.content.explored) {
-        content = "E";
-      } else if (this.props.content.flagged) {
-        content = "F";
+      if (this.props.tile.bombed) {
+        tile = "B";
+      } else if (this.props.tile.explored) {
+        tile = "E";
+      } else if (this.props.tile.flagged) {
+        tile = "F";
       }
 
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
@@ -451,7 +467,7 @@ var Tile = /*#__PURE__*/function (_React$Component) {
         onClick: function onClick(e) {
           that.clickTile(e);
         }
-      }, content);
+      }, tile);
     }
   }]);
 

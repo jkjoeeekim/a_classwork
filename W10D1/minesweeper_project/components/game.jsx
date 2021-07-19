@@ -6,19 +6,26 @@ export default class Game extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      alt: false,
+      msg: null,
       board: new Minesweeper.Board(10, 10)
     };
-
     this.updateGame = this.updateGame.bind(this);
+
   }
 
   updateGame() {
-    // return true;
+
+    if (this.state.board.won()) {
+      this.setState({ msg: 'Victory!' })
+    } else if (this.state.board.lost()) {
+      this.setState({ msg: 'Defeat' })
+    }
   }
 
   render() {
     return (
-      <Board board={this.state.board} updateGame={this.updateGame} alt={this.props.alt} />
+      <Board board={this.state.board} msg={this.state.msg} updateGame={this.updateGame} alt={this.state.alt} />
     )
   }
 }
