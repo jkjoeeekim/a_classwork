@@ -1,0 +1,8 @@
+.row {
+    display: flex;
+}
+
+.row li {
+    margin: 5px 5px;
+    /* border: solid .2mm grey; */
+}

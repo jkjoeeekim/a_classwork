@@ -6,9 +6,17 @@ export default class Tile extends React.Component {
   }
 
   render() {
-    // console.log(this.props.updateGame())
+    let content = '_';
+    if (this.props.content.bombed) {
+      content = "B" 
+    } else if (this.props.content.explored) {
+      content = "E"
+    } else if (this.props.content.flagged) {
+      content = "F"
+    } 
+
     return (
-      <h1>T</h1>
+      <li>{content}</li>
     )
   }
 }
