@@ -3,6 +3,7 @@ html {
   background-color: grey;
 }
 
+/* Clock style properties */
 .clock-container {
   display: flex;
   flex-direction: column;
@@ -11,7 +12,7 @@ html {
   margin-top: 3%;
 }
 
-#clock-details-container {
+#clock-content-container {
   display: flex;
   width: 400px;
   margin: 0 auto;
@@ -31,10 +32,36 @@ p {
   font-size: 36px;
 }
 
-#clock-details-container p:first-child {
+#clock-content-container p:first-child {
   margin-bottom: 15px;
 }
+/* END Clock style properties  */
 
-.title {
+/* Tabs style properties  */
+.title-container {
   margin-bottom: 10px;
+}
+
+.tabs-container {
+  display: flex;
+  flex-direction: column;
+  width: 375px;
+  margin: 0 auto;
+  margin-top: 3%;
+}
+
+.tabs-content-container {
+  width: 250px;
+  margin: 0 auto;
+  border: 2px solid red;
+  background-color: pink;
+  padding: 25px;
+}
+
+.tabs-bar ul {
+  width: 200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }

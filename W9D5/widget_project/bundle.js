@@ -90,12 +90,11 @@ var Clock = /*#__PURE__*/function (_React$Component) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("section", {
         className: "clock-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("section", {
-        id: "clock-title-container",
-        "class": "title"
+        className: "title-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
         id: ""
       }, "Clock")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("section", {
-        id: "clock-details-container"
+        id: "clock-content-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("section", {
         id: "clock-left-side"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
@@ -177,16 +176,18 @@ var Page = /*#__PURE__*/function (_React$Component) {
 
   var _super = _createSuper(Page);
 
-  function Page() {
+  function Page(props) {
     _classCallCheck(this, Page);
 
-    return _super.apply(this, arguments);
+    return _super.call(this, props);
   }
 
   _createClass(Page, [{
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("section", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_clock__WEBPACK_IMPORTED_MODULE_1__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_tab__WEBPACK_IMPORTED_MODULE_2__.default, null));
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("section", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_clock__WEBPACK_IMPORTED_MODULE_1__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_tab__WEBPACK_IMPORTED_MODULE_2__.default, {
+        tabs: this.props.tabs
+      }));
     }
   }]);
 
@@ -238,23 +239,52 @@ var Tab = /*#__PURE__*/function (_React$Component) {
   var _super = _createSuper(Tab);
 
   function Tab(props) {
+    var _this;
+
     _classCallCheck(this, Tab);
 
-    return _super.call(this, props);
+    _this = _super.call(this, props);
+    _this.state = {
+      selected: 0
+    };
+    return _this;
   }
 
   _createClass(Tab, [{
+    key: "selectTab",
+    value: function selectTab(idx) {
+      console.log(idx);
+      this.state.selected = idx;
+    }
+  }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("section", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("section", {
-        "class": "tab-bar"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "one"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "two"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "three"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("section", {
-        "class": "first"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "I am the first")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("section", {
-        "class": "second"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "I am the second")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("section", {
-        "class": "third"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "I am the third")));
+      var _this2 = this;
+
+      var tabBar = this.props.tabs.map(function (tab, idx) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+          key: idx,
+          className: tab.title,
+          onClick: function onClick() {
+            _this2.selectTab(idx);
+          }
+        }, tab.title);
+      });
+      var tabSections = this.props.tabs.map(function (tab, idx) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("section", {
+          key: idx,
+          className: tab.title + "-section"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, tab.content));
+      });
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("section", {
+        className: "tabs-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("section", {
+        className: "title-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Tabs")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("section", {
+        className: "tabs-content-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("section", {
+        className: "tabs-bar"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, tabBar)), tabSections));
     }
   }]);
 
@@ -30151,7 +30181,19 @@ __webpack_require__.r(__webpack_exports__);
 
 document.addEventListener("DOMContentLoaded", function () {
   var root = document.querySelector('.root');
-  react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_page__WEBPACK_IMPORTED_MODULE_4__.default, null), root);
+  var tabs = [{
+    title: "one",
+    content: "I am the first"
+  }, {
+    title: "two",
+    content: "I am the second"
+  }, {
+    title: "three",
+    content: "I am the third"
+  }];
+  react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_page__WEBPACK_IMPORTED_MODULE_4__.default, {
+    tabs: tabs
+  }), root);
 });
 })();
 

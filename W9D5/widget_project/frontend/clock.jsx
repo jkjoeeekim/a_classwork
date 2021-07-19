@@ -38,10 +38,10 @@ class Clock extends React.Component {
   render() {
     return (
       <section className='clock-container'>
-        <section id="clock-title-container" class="title">
+        <section className="title-container">
           <p id="">Clock</p>
         </section>
-        <section id="clock-details-container">
+        <section id="clock-content-container">
           <section id="clock-left-side">
             <p id="time">Time:</p>
             <p id="date">Date:</p>
