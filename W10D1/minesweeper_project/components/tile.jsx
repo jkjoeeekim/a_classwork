@@ -21,12 +21,15 @@ export default class Tile extends React.Component {
 
     document.addEventListener("keydown", function (e) {
       if (e.altKey) {
+        console.log(e)
         that.setState({alt: true})
 
         if (!that.clearing) {
+          // console.log('hi')
           that.clearing = true;
           setTimeout(function () {
-            that.state.alt = false;
+            // that.state.alt = false;
+            that.setState({alt: false})
             that.clearing = false;
           }, 100);
         }
@@ -41,7 +44,8 @@ export default class Tile extends React.Component {
     // })
   }
 
-  clickTile() {
+  clickTile(e) {
+    // console.log(e)
     let that = this;
 
     if (this.state.alt) {
@@ -55,9 +59,7 @@ export default class Tile extends React.Component {
     }
   }
 
-  // keypress(e) {
-  //   console.log(e)
-  // }
+
 
   render() {
     let that = this;
@@ -73,7 +75,7 @@ export default class Tile extends React.Component {
 
 
     return (
-      <li className={this.state.status} onKeyPress={that.keypress} onClick={function () { that.clickTile(); }}>{content}</li>
+      <li className={this.state.status} onClick={function (e) { that.clickTile(e); }}>{content}</li>
     );
   }
 }

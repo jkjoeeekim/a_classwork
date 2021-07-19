@@ -399,14 +399,19 @@ var Tile = /*#__PURE__*/function (_React$Component) {
 
     document.addEventListener("keydown", function (e) {
       if (e.altKey) {
+        console.log(e);
         that.setState({
           alt: true
         });
 
         if (!that.clearing) {
+          // console.log('hi')
           that.clearing = true;
           setTimeout(function () {
-            that.state.alt = false;
+            // that.state.alt = false;
+            that.setState({
+              alt: false
+            });
             that.clearing = false;
           }, 100);
         }
@@ -423,7 +428,8 @@ var Tile = /*#__PURE__*/function (_React$Component) {
 
   _createClass(Tile, [{
     key: "clickTile",
-    value: function clickTile() {
+    value: function clickTile(e) {
+      // console.log(e)
       var that = this;
 
       if (this.state.alt) {
@@ -435,10 +441,7 @@ var Tile = /*#__PURE__*/function (_React$Component) {
           status: 'tile-clicked'
         });
       }
-    } // keypress(e) {
-    //   console.log(e)
-    // }
-
+    }
   }, {
     key: "render",
     value: function render() {
@@ -455,9 +458,8 @@ var Tile = /*#__PURE__*/function (_React$Component) {
 
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
         className: this.state.status,
-        onKeyPress: that.keypress,
-        onClick: function onClick() {
-          that.clickTile();
+        onClick: function onClick(e) {
+          that.clickTile(e);
         }
       }, content);
     }
