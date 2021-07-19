@@ -21,31 +21,22 @@ export default class Tile extends React.Component {
 
     document.addEventListener("keydown", function (e) {
       if (e.altKey) {
-        console.log(e)
-        that.setState({alt: true})
-
-        if (!that.clearing) {
-          // console.log('hi')
-          that.clearing = true;
-          setTimeout(function () {
-            // that.state.alt = false;
-            that.setState({alt: false})
-            that.clearing = false;
-          }, 100);
-        }
+        that.state.alt = true
       }
     });
 
-    // document.addEventListener("keyup", function(e) {
-    //   if (e.altKey) {
-    //     console.log('keyup', e)
-    //     that.state.alt = false;
-    //   }
-    // })
+    document.addEventListener("keyup", function(e) {
+      console.log(e)
+      if (e.key === "Alt") {
+        console.log('keyup', e)
+        that.state.alt = false;
+      }
+    })
   }
 
   clickTile(e) {
     // console.log(e)
+    console.log(this.state.alt)
     let that = this;
 
     if (this.state.alt) {
@@ -57,6 +48,8 @@ export default class Tile extends React.Component {
         status: 'tile-clicked'
       });
     }
+
+    this.props.updateGame(this, this.state.alt)
   }
 
 
