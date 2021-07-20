@@ -112,7 +112,7 @@ var receiveStep = function receiveStep(step) {
     step: step
   };
 };
-var removeStep = function removeStep() {
+var removeStep = function removeStep(step) {
   return {
     type: REMOVE_STEP,
     step: step
@@ -153,7 +153,7 @@ var receiveTodos = function receiveTodos(todos) {
 };
 var removeTodo = function removeTodo(todo) {
   return {
-    type: REMOVE_TODOS,
+    type: REMOVE_TODO,
     todo: todo
   };
 };

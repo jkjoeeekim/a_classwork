@@ -13,6 +13,6 @@ export const receiveTodos = (todos) => ({
 });
 
 export const removeTodo = (todo) => ({
-  type: REMOVE_TODOS,
+  type: REMOVE_TODO,
   todo
 });
