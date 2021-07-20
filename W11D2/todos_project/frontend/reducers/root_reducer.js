@@ -1,10 +1,8 @@
-import {combineReducers} from 'redux';
-import todoReducer from './todos_reducer';
+import { combineReducers } from 'redux';
+import todosReducer from './todos_reducer';
 
-export const root_reducer = combineReducers(
-    {
-        todoReducer
-    }
-);
+const rootReducer = combineReducers({
+    todos: todosReducer
+});
 
-
+export default rootReducer;
