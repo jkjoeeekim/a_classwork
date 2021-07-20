@@ -9,47 +9,53 @@ export default class Tile extends React.Component {
       alt: false
     };
 
-    this.keypress = function (event) {
-    };
-
+    this.alt = false;
     this.clickTile = this.clickTile.bind(this);
+
+    if (this.props.tile.flagged) {
+      this.state.status = 'tile-flag'
+    } else if (this.props.tile.explored) {
+      this.state.status = 'tile-clicked'
+    }
 
     let that = this;
     document.addEventListener("keydown", function (e) {
       if (e.altKey) {
-        // that.setState({ alt: true })
-        that.state.alt = true;
+        that.setState({ alt: true });
+        // that.state.alt = true;
       }
     });
 
     document.addEventListener("keyup", function (e) {
       if (e.key === "Alt") {
-        // that.setState({ alt: false })
-        that.state.alt = false;
+        that.setState({ alt: false });
+        // that.state.alt = false;
       }
-    })
+    });
   }
 
   clickTile(e) {
-    console.log(this.state.alt)
+    console.log(this.state.alt);
     let that = this;
-    if (this.props.tile.flagged || this.props.tile.explored ) return;
+    console.log(this.props.tile);
+    if (this.props.tile.flagged || this.props.tile.explored) {
 
-    if (this.state.alt) {
+    } else if (this.state.alt) {
       this.props.tile.toggleFlag();
       // console.log(this.props.tile)
       this.setState({
         status: 'tile-flag'
       });
     } else {
-      this.props.tile.explore();
       // console.log(this.props.tile);
       this.setState({
         status: 'tile-clicked'
       });
+      this.props.tile.explore();
     }
 
-    this.props.updateGame()
+    this.props.updateGame();
+    console.log(this.props.tile);
   }
 
 

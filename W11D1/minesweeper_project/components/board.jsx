@@ -4,15 +4,12 @@ import Tile from './tile';
 export default class Board  extends React.Component {
   constructor(props) {
     super(props);
-    // this.state = {
-    //   msg: null
-    // }
   }
 
   createRow(row) {
     return row.map((ele, idx) => {
       return (
-        <Tile alt={this.props.alt} tile={ele} updateGame={this.props.updateGame} key={idx} />
+        <Tile tile={ele} updateGame={this.props.updateGame} key={idx} />
       )
     })
 

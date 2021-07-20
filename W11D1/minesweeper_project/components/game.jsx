@@ -6,7 +6,6 @@ export default class Game extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      alt: false,
       msg: null,
       board: new Minesweeper.Board(10, 10)
     };
@@ -15,7 +14,6 @@ export default class Game extends React.Component {
   }
 
   updateGame() {
-
     if (this.state.board.won()) {
       this.setState({ msg: 'Victory!' })
     } else if (this.state.board.lost()) {
@@ -25,7 +23,7 @@ export default class Game extends React.Component {
 
   render() {
     return (
-      <Board board={this.state.board} msg={this.state.msg} updateGame={this.updateGame} alt={this.state.alt} />
+      <Board board={this.state.board} msg={this.state.msg} updateGame={this.updateGame}/>
     )
   }
 }
