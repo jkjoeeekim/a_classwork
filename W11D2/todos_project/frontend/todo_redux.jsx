@@ -1,20 +1,26 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import configureStore from './store/store';
+import Store from './store/store';
+import Root from "./components/root";
 import { receiveTodo, receiveTodos, removeTodo } from "./actions/todo_actions"
 import { receiveStep, receiveSteps, removeStep } from "./actions/steps_actions"
+import { allTodos } from "./reducers/selectors"
 
 document.addEventListener("DOMContentLoaded", function () {
   let root = document.getElementById("root");
-  window.store = configureStore();
+  const store = Store();
+  window.store = store;
+
+  // for testing purpose, put methods onto windows. 
   window.receiveTodo = receiveTodo;
   window.receiveTodos = receiveTodos;
   window.removeTodo = removeTodo;
   window.receiveSteps = receiveSteps;
   window.receiveStep = receiveStep;
   window.removeStep = removeStep;
+  window.allTodos = allTodos;
 
-  ReactDOM.render(<h1>Todos App</h1>, root);
+  ReactDOM.render(<Root store={store} />, root);
 });
 
 
