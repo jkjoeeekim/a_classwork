@@ -12,13 +12,13 @@ document.addEventListener("DOMContentLoaded", function () {
   window.store = store;
 
   // for testing purpose, put methods onto windows. 
-  window.receiveTodo = receiveTodo;
-  window.receiveTodos = receiveTodos;
-  window.removeTodo = removeTodo;
-  window.receiveSteps = receiveSteps;
-  window.receiveStep = receiveStep;
-  window.removeStep = removeStep;
-  window.allTodos = allTodos;
+  // window.receiveTodo = receiveTodo;
+  // window.receiveTodos = receiveTodos;
+  // window.removeTodo = removeTodo;
+  // window.receiveSteps = receiveSteps;
+  // window.receiveStep = receiveStep;
+  // window.removeStep = removeStep;
+  // window.allTodos = allTodos;
 
   ReactDOM.render(<Root store={store} />, root);
 });
