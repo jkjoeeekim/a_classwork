@@ -4,7 +4,7 @@ import Store from './store/store';
 import Root from "./components/root";
 import { receiveTodo, receiveTodos, removeTodo } from "./actions/todo_actions"
 import { receiveStep, receiveSteps, removeStep } from "./actions/steps_actions"
-import { allTodos } from "./reducers/selectors"
+import { allTodos, stepsByTodoId } from "./reducers/selectors"
 
 document.addEventListener("DOMContentLoaded", function () {
   let root = document.getElementById("root");
@@ -19,6 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // window.receiveStep = receiveStep;
   // window.removeStep = removeStep;
   // window.allTodos = allTodos;
+  window.stepsByTodoId = stepsByTodoId;
 
   ReactDOM.render(<Root store={store} />, root);
 });

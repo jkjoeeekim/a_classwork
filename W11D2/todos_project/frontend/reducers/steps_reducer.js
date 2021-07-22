@@ -10,6 +10,18 @@ const initialState = {
     },
     2: {
         id: 2,
+        title: "buy soap2",
+        todo_id: 1,
+        done: false
+    },
+    3: {
+        id: 3,
+        title: "buy soap3",
+        todo_id: 2,
+        done: false
+    },
+    4: {
+        id: 4,
         title: "make him happy",
         todo_id: 2,
         done: true
